@@ -7,6 +7,7 @@ module.exports = {
   name: "user",
 
   actions: {
+    // Crear un usuario
     async createUser(ctx) {
       const { username, email } = ctx.params;
 
@@ -20,6 +21,7 @@ module.exports = {
       return user;
     },
 
+    // Obtener un usuario por ID
     async getUser(ctx) {
       const { id } = ctx.params;
 
@@ -28,6 +30,13 @@ module.exports = {
       });
 
       return user;
+    },
+
+    // Listar todos los usuarios
+    async listUsers(ctx) {
+      const users = await prisma.user.findMany();
+
+      return users;
     },
   },
 };
