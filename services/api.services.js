@@ -9,7 +9,8 @@ module.exports = {
     routes: [
       {
         path: "/api",
-        whitelist: ["hello.sayHello"],
+        whitelist: ["hello.*"],
+        mappingPolicy: "all",
         bodyParsers: {
           json: true,
           urlencoded: { extended: true},

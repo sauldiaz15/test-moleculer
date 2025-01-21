@@ -38,5 +38,17 @@ module.exports = {
 
       return users;
     },
+
+
+    // Eliminar un usuario
+    async deleteUser(ctx) {
+      const { id } = ctx.params;
+
+      const user = await prisma.user.delete({
+        where: { id: Number(id) },
+      });
+
+      return user;
+    },
   },
 };

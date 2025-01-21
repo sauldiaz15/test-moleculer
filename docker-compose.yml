@@ -1,22 +1,23 @@
-version: '3.7'
 
 services:
   mysql:
+    container_name: box-mysql
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: moleculer_db
-      MYSQL_USER: root@localhost
-      MYSQL_PASSWORD: userpassword
+      MYSQL_ROOT_PASSWORD: rootpassword       # Contraseña del root
+      MYSQL_DATABASE: moleculer_db            # Base de datos a crear
+      MYSQL_USER: user                         # Usuario con permisos
+      MYSQL_PASSWORD: userpassword            # Contraseña del usuario
     ports:
       - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql             # Volumen persistente para datos
     networks:
       - moleculer_network
+    restart: unless-stopped                   # Reinicia automáticamente el contenedor
 
 volumes:
-  mysql-data:
+  mysql-data:                                # Volumen persistente para datos
 
 networks:
   moleculer_network:

@@ -15,6 +15,11 @@ broker.createService(ApiGateway, {
     routes: [
       {
         path: "/api", // Ruta de acceso
+        aliases: {
+          "POST /register": "auth.register",  // Ruta para registrar un usuario
+          "POST /login": "auth.login",        // Ruta para autenticar un usuario
+          "POST /user-info": "auth.getUserInfo", // Ruta para obtener la info del usuario autenticado
+        },
         whitelist: ["**"], // Todas las acciones están disponibles
         bodyParsers: {
           json: true,
@@ -29,6 +34,22 @@ broker.createService(ApiGateway, {
 broker.loadService("./services/hello.service.js");
 broker.loadService("./services/user.service.js");
 
+broker.createService(require("./services/authService")); // Servicio de autenticación
 // Iniciar el broker
 broker.start();
 
+
+// const { ServiceBroker } = require("moleculer");
+
+// // Crear broker
+// const broker = new ServiceBroker({
+//     logger: console,
+//     transporter: "NATS", // Puedes cambiar el transportador según tu configuración
+// });
+
+// // Cargar servicios
+// broker.loadService("./services/hello.service.js");
+// broker.loadService("./services/user.service.js");
+
+// // Iniciar el broker y llamar al servicio
+// broker.start()
