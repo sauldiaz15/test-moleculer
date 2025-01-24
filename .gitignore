@@ -1,3 +1,41 @@
+# COMANDOS UTILES
+# Inicializar y clonar
+# git init >>Inicializa un nuevo repositorio en la carpeta actual.
+# git clone <URL> >>Clona un repositorio remoto en tu máquina local.
+
+# Estados y seguimiento
+# git status >>Muestra el estado del repositorio, incluyendo archivos modificados, nuevos y en seguimiento.
+# git add <archivo> >>Agrega un archivo específico al área de preparación (staging).
+# git add . >>Agrega todos los cambios (nuevos y modificados) al área de preparación.
+
+# Commits
+# git commit -m "Mensaje del commit" >>Crea un commit con un mensaje descriptivo.
+# git commit -a -m "Mensaje del commit" >>Realiza el commit de los cambios rastreados, omitiendo git add.
+
+# Logs y historial
+# git log >>Muestra el historial de commits en el repositorio.
+# git log --oneline >>Muestra el historial de commits en una sola línea por commit.
+
+# Ramas
+# git branch >>Lista todas las ramas del repositorio local.
+# git branch <nombre-rama> >>Crea una nueva rama.
+# git checkout <nombre-rama> >>Cambia a una rama existente.
+# git switch -c <nombre-rama> >>Crea y cambia a una nueva rama.
+# git merge <nombre-rama> >>Fusiona una rama específica con la rama actual.
+
+# Remoto
+# git remote add origin <URL> >>Vincula un repositorio local con un repositorio remoto.
+# git remote -v >>Muestra las URLs de los repositorios remotos.
+# git push origin <rama> >>Sube los commits de una rama al repositorio remoto.
+# git pull origin <rama> >>Descarga los cambios del repositorio remoto y los fusiona con la rama actual.
+
+# Deshacer cambios
+# git reset <archivo> >>Saca un archivo del área de preparación.
+# git reset --hard <commit> >>Restaura el repositorio a un commit anterior, eliminando todos los cambios.
+# git checkout -- <archivo> >>Descarta los cambios no confirmados en un archivo.
+
+
+
 node_modules
 # Keep environment variables out of version control
 .env

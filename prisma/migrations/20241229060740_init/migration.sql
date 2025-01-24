@@ -10,3 +10,7 @@ CREATE TABLE `User` (
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+ALTER TABLE `User`
+  ADD `password` varchar(255) NULL; -- Permite que la columna `password` sea `NULL`
+
