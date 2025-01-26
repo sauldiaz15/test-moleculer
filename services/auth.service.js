@@ -5,6 +5,15 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   name: "auth",
 
+  // Métodos personalizados
+  methods: {
+    // Método para validar la contraseña
+    isValidPassword(password) {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      return passwordRegex.test(password);
+    },
+  },
+
   actions: {
     // Registro de usuario
     async register(ctx) {
@@ -12,6 +21,13 @@ module.exports = {
 
       if (!username || !email || !password) {
         throw new Error("Todos los campos (username, email, password) son obligatorios");
+      }
+
+      // Validar la seguridad de la contraseña
+      if (!this.isValidPassword(password)) {
+        throw new Error(
+          "La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una minúscula, un número y un carácter especial."
+        );
       }
 
       try {
@@ -72,4 +88,3 @@ module.exports = {
     },
   },
 };
-
