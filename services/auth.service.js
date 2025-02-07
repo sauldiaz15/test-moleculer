@@ -9,6 +9,7 @@ module.exports = {
   methods: {
     // Método para validar la contraseña
     isValidPassword(password) {
+      console.log(password)
       const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       return passwordRegex.test(password);
     },
@@ -80,8 +81,8 @@ module.exports = {
           process.env.JWT_SECRET || "secret_key",
           { expiresIn: "1h" }
         );
-
-        return { message: "Inicio de sesión exitoso", token };
+        
+        return { message: "Inicio de sesión exitoso", token, username: user.username };
       } catch (error) {
         throw new Error("Error al iniciar sesión: " + error.message);
       }

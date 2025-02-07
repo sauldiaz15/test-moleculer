@@ -16,6 +16,7 @@ module.exports = (broker) => {
             "POST /user-info": "user.getUserInfo", // Ruta protegida para obtener info del usuario autenticado
             "GET /userS-info": "user.listUsers", // Ruta protegida para listar usuarios
           },
+          cors: true, //necesario para la web
           whitelist: ["**"], // Permitir todas las acciones definidas en servicios
           bodyParsers: {
             json: true,
