@@ -66,5 +66,19 @@ module.exports = {
         throw new Error("Error al obtener el usuario: " + error.message);
       }
     },
+    //Actualizacion de password
+    async updatePassword(ctx) {
+      const { email, password } = ctx.params; // 🔹 La contraseña ya está encriptada y validada
+
+      try {
+        await prisma.user.update({
+          where: { email },
+          data: { password },
+        });
+        return { message: "Contraseña actualizada correctamente." };
+      } catch (error) {
+        throw new Error("No se pudo actualizar la contraseña: " + error.message);
+      }
+    }
   },
 };

@@ -9,7 +9,7 @@ const broker = new ServiceBroker({
 // Cargar servicios
 broker.loadService("./services/auth.service.js");
 broker.loadService("./services/user.service.js");
-
+broker.loadService("./services/password.services.js");
 // Cargar el API Gateway desde un archivo separado
 require("./services/api.services.js")(broker); // Pasamos el broker para que lo use el API Gateway
 

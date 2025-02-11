@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "dev": "node broker.js"
-      
-
+    "dev": "node broker.js"
   },
   "keywords": [],
   "author": "",
@@ -16,10 +14,12 @@
     "@prisma/client": "^6.1.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "moleculer": "^0.14.35",
     "moleculer-web": "^0.10.7",
-    "nats": "^2.28.2"
+    "nats": "^2.28.2",
+    "nodemailer": "^6.10.0"
   },
   "devDependencies": {
     "prisma": "^6.1.0"

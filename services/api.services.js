@@ -2,30 +2,30 @@ const ApiGateway = require("moleculer-web");
 const jwt = require("jsonwebtoken");
 
 module.exports = (broker) => {
-  // Crear el servicio API Gateway
   broker.createService(ApiGateway, {
-    name: "api", // Nombre del servicio
+    name: "api",
     settings: {
-      port: 3000, // Puerto en el que se ejecutará el API Gateway
+      port: 3000,
       routes: [
         {
-          path: "/api", // Ruta base
+          path: "/api",
           aliases: {
-            "POST /register": "auth.register", // Ruta para registrar un usuario
-            "POST /login": "auth.login", // Ruta para autenticar un usuario
-            "POST /user-info": "user.getUserInfo", // Ruta protegida para obtener info del usuario autenticado
-            "GET /userS-info": "user.listUsers", // Ruta protegida para listar usuarios
+            "POST /register": "auth.register",
+            "POST /login": "auth.login",
+            "POST /user-info": "user.getUserInfo",
+            "GET /userS-info": "user.listUsers",
+            "POST /forget-password": "password.forgetPassword",
+            "POST /reset-password": "password.resetPassword",
           },
-          cors: true, //necesario para la web
-          whitelist: ["**"], // Permitir todas las acciones definidas en servicios
+          cors: true,
+          whitelist: ["**"],
           bodyParsers: {
             json: true,
             urlencoded: { extended: true },
           },
-          // Middleware para validar token en rutas protegidas
           use: [
             async (req, res, next) => {
-              // Excluir las rutas públicas (como login y register)
+              // Excluir rutas públicas
               if (req.url = "/api/register" || req.url == "/api/login") {
                 return next();
               }
@@ -38,9 +38,10 @@ module.exports = (broker) => {
                 }
 
                 const token = authHeader.split(" ")[1];
-                const decoded = jwt.verify(token, process.env.JWT_SECRET || "secret_key");
-                req.$ctx.meta.user = decoded; // Agregar el usuario autenticado al contexto de la solicitud
-                next(); // Continuar al siguiente middleware o acción
+                const secretKey = process.env.JWT_SECRET || "secret_key"; // Asegurar clave JWT
+                const decoded = jwt.verify(token, secretKey);
+                req.$ctx.meta.user = decoded;
+                next();
               } catch (err) {
                 res.writeHead(401, { "Content-Type": "application/json" });
                 return res.end(JSON.stringify({ error: "Token inválido o expirado" }));
@@ -49,6 +50,9 @@ module.exports = (broker) => {
           ],
         },
       ],
+      assets: {
+        folder: "./public", // 📌 Servir archivos estáticos desde la carpeta "public"
+      },
     },
   });
 };
