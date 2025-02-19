@@ -16,6 +16,7 @@ module.exports = (broker) => {
             "GET /userS-info": "user.listUsers",
             "POST /forget-password": "password.forgetPassword",
             "POST /reset-password": "password.resetPassword",
+            "GET /reset-passwordform": "password.redirect",
           },
           cors: true,
           whitelist: ["**"],

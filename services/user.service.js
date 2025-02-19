@@ -69,7 +69,7 @@ module.exports = {
     //Actualizacion de password
     async updatePassword(ctx) {
       const { email, password } = ctx.params; // 🔹 La contraseña ya está encriptada y validada
-
+      
       try {
         await prisma.user.update({
           where: { email },
